@@ -66,6 +66,24 @@ llm = ChatAnthropic(model='claude-sonnet-4-0', temperature=0.0)
 
 **Env:** `ANTHROPIC_API_KEY`
 
+### Claude Code OAuth (No API Key)
+
+Use your Claude Pro/Max subscription instead of an API key. Reads OAuth tokens
+from Claude Code CLI (`~/.claude/auth.json`) or pi agent (`~/.pi/agent/auth.json`).
+
+```python
+from browser_use import ChatClaudeCodeOAuth
+
+llm = ChatClaudeCodeOAuth(model='claude-sonnet-4-6')
+llm = ChatClaudeCodeOAuth(model='claude-opus-4-6')
+
+# Or with explicit credential path:
+llm = ChatClaudeCodeOAuth(model='claude-sonnet-4-6', credential_path='~/.pi/agent/auth.json')
+```
+
+**No env var needed** — tokens are auto-loaded and refreshed from credential stores.
+Login first with `claude` (Claude Code CLI) or `pi` then `/login`.
+
 ## Azure OpenAI
 
 ```python
