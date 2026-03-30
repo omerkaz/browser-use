@@ -83,5 +83,4 @@ product_extraction.py
 *report.md
 plot.py
 
-.claude/*
-!.claude/settings.json
+.claude/
