@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       actions: read
-      contents: read
-      pull-requests: read
+      contents: write
+      pull-requests: write
       id-token: write
       discussions: write
       issues: write
@@ -68,7 +68,7 @@ jobs:
         id: claude
         uses: anthropics/claude-code-action@beta
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          use_oauth: true
           model: "claude-opus-4-20250514"
           fallback_model: "claude-3-5-sonnet-20241022"
           custom_instructions: |
