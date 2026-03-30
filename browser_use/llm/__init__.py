@@ -28,6 +28,7 @@ from browser_use.llm.messages import (
 if TYPE_CHECKING:
 	from browser_use.llm.anthropic.chat import ChatAnthropic
 	from browser_use.llm.aws.chat_anthropic import ChatAnthropicBedrock
+	from browser_use.llm.claude_code_oauth.chat import ChatClaudeCodeOAuth
 	from browser_use.llm.aws.chat_bedrock import ChatAWSBedrock
 	from browser_use.llm.azure.chat import ChatAzureOpenAI
 	from browser_use.llm.browser_use.chat import ChatBrowserUse
@@ -80,6 +81,7 @@ if TYPE_CHECKING:
 # Lazy imports mapping for heavy chat models
 _LAZY_IMPORTS = {
 	'ChatAnthropic': ('browser_use.llm.anthropic.chat', 'ChatAnthropic'),
+	'ChatClaudeCodeOAuth': ('browser_use.llm.claude_code_oauth.chat', 'ChatClaudeCodeOAuth'),
 	'ChatAnthropicBedrock': ('browser_use.llm.aws.chat_anthropic', 'ChatAnthropicBedrock'),
 	'ChatAWSBedrock': ('browser_use.llm.aws.chat_bedrock', 'ChatAWSBedrock'),
 	'ChatAzureOpenAI': ('browser_use.llm.azure.chat', 'ChatAzureOpenAI'),
@@ -158,4 +160,5 @@ __all__ = [
 	'ChatOpenRouter',
 	'ChatVercel',
 	'ChatCerebras',
+	'ChatClaudeCodeOAuth',
 ]

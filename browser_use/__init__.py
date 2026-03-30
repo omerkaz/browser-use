@@ -56,6 +56,7 @@ if TYPE_CHECKING:
 	from browser_use.llm import models
 	from browser_use.llm.anthropic.chat import ChatAnthropic
 	from browser_use.llm.azure.chat import ChatAzureOpenAI
+	from browser_use.llm.claude_code_oauth.chat import ChatClaudeCodeOAuth
 	from browser_use.llm.browser_use.chat import ChatBrowserUse
 	from browser_use.llm.google.chat import ChatGoogle
 	from browser_use.llm.groq.chat import ChatGroq
@@ -91,6 +92,7 @@ _LAZY_IMPORTS = {
 	'ChatOpenAI': ('browser_use.llm.openai.chat', 'ChatOpenAI'),
 	'ChatGoogle': ('browser_use.llm.google.chat', 'ChatGoogle'),
 	'ChatAnthropic': ('browser_use.llm.anthropic.chat', 'ChatAnthropic'),
+	'ChatClaudeCodeOAuth': ('browser_use.llm.claude_code_oauth.chat', 'ChatClaudeCodeOAuth'),
 	'ChatBrowserUse': ('browser_use.llm.browser_use.chat', 'ChatBrowserUse'),
 	'ChatGroq': ('browser_use.llm.groq.chat', 'ChatGroq'),
 	'ChatLiteLLM': ('browser_use.llm.litellm.chat', 'ChatLiteLLM'),
@@ -151,6 +153,7 @@ __all__ = [
 	'ChatOCIRaw',
 	'ChatOllama',
 	'ChatVercel',
+	'ChatClaudeCodeOAuth',
 	'Tools',
 	'Controller',
 	# LLM models module

@@ -21,6 +21,15 @@ from browser_use.llm.google.chat import ChatGoogle
 from browser_use.llm.mistral.chat import ChatMistral
 from browser_use.llm.openai.chat import ChatOpenAI
 
+# Optional Claude Code OAuth import
+try:
+	from browser_use.llm.claude_code_oauth.chat import ChatClaudeCodeOAuth
+
+	CLAUDE_CODE_OAUTH_AVAILABLE = True
+except ImportError:
+	ChatClaudeCodeOAuth = None
+	CLAUDE_CODE_OAUTH_AVAILABLE = False
+
 # Optional OCI import
 try:
 	from browser_use.llm.oci_raw.chat import ChatOCIRaw
@@ -203,6 +212,13 @@ def get_llm_by_name(model_name: str):
 		api_key = os.getenv('CEREBRAS_API_KEY')
 		return ChatCerebras(model=model, api_key=api_key)
 
+	# Claude Code OAuth Models
+	elif provider == 'claude_code':
+		if not CLAUDE_CODE_OAUTH_AVAILABLE:
+			raise ImportError('Claude Code OAuth not available. Install httpx: pip install httpx')
+		model_name = model_part.replace('_', '-')
+		return ChatClaudeCodeOAuth(model=model_name)
+
 	# Browser Use Models
 	elif provider == 'bu':
 		# Handle bu_latest -> bu-latest conversion (need to prepend 'bu-' back)
@@ -211,7 +227,7 @@ def get_llm_by_name(model_name: str):
 		return ChatBrowserUse(model=model, api_key=api_key)
 
 	else:
-		available_providers = ['openai', 'azure', 'google', 'oci', 'cerebras', 'bu']
+		available_providers = ['openai', 'azure', 'google', 'oci', 'cerebras', 'claude_code', 'bu']
 
 		raise ValueError(f"Unknown provider: '{provider}'. Available providers: {', '.join(available_providers)}")
 
@@ -236,6 +252,10 @@ def __getattr__(name: str) -> 'BaseChatModel':
 		return ChatOCIRaw  # type: ignore
 	elif name == 'ChatCerebras':
 		return ChatCerebras  # type: ignore
+	elif name == 'ChatClaudeCodeOAuth':
+		if not CLAUDE_CODE_OAUTH_AVAILABLE:
+			raise ImportError('Claude Code OAuth not available. Install httpx: pip install httpx')
+		return ChatClaudeCodeOAuth  # type: ignore
 	elif name == 'ChatBrowserUse':
 		return ChatBrowserUse  # type: ignore
 
